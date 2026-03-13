@@ -22,7 +22,7 @@ def run(target: str, port: int=443) -> dict:
                         der_cert = ssock.getpeercert(binary_form=True)
                         if der_cert:
                             results['certificate']['raw_der_length'] = len(der_cert)
-                            results['certificate']['note'] = 'Certificate verification failed — possibly self-signed'
+                            results['certificate']['note'] = 'Certificate verification failed: possibly self-signed'
                         results['errors'].append('SSL certificate verification failed')
                         results['certificate']['protocol'] = ssock.version()
                         results['certificate']['cipher'] = ssock.cipher()
@@ -63,7 +63,7 @@ def run(target: str, port: int=443) -> dict:
     except socket.timeout:
         results['errors'].append(f'Connection to {target}:{port} timed out')
     except ConnectionRefusedError:
-        results['errors'].append(f'Connection to {target}:{port} refused — SSL not available')
+        results['errors'].append(f'Connection to {target}:{port} refused: SSL not available')
     except socket.gaierror:
         results['errors'].append(f'Could not resolve {target}')
     except Exception as e:

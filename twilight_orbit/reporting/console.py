@@ -84,7 +84,7 @@ def print_subdomain_results(data: dict):
             source.append('DNS')
         if sub in crt_sh:
             source.append('crt.sh')
-        table.add_row(str(i), sub, ', '.join(source) if source else '—')
+        table.add_row(str(i), sub, ', '.join(source) if source else ':')
     console.print(table)
 
 def print_port_results(data: dict):
@@ -310,7 +310,7 @@ def _print_threat(data: dict):
     if tf.get('is_malicious'):
         console.print(f'\n  [bold red]⚠ ThreatFox: MALICIOUS IOCs FOUND[/bold red]')
         for ioc in tf.get('iocs', []):
-            console.print(f"    [red]• {ioc.get('threat_type', '')} — {ioc.get('malware', '')}[/red]")
+            console.print(f"    [red]• {ioc.get('threat_type', '')} : {ioc.get('malware', '')}[/red]")
     else:
         console.print(f'\n  [green]✓ ThreatFox: No known IOCs[/green]')
     rdns = data.get('reverse_dns', [])

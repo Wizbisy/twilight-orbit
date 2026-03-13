@@ -9,7 +9,7 @@
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=for-the-badge)](#)
 
 A powerful, modular OSINT reconnaissance tool designed specifically for bug bounty hunters, and security researchers.  
-Powered by **real free APIs** — AlienVault OTX, URLScan.io, Internet Archive, ThreatFox, Shodan, SecurityTrails and more. 🔍
+Powered by **real free APIs**: AlienVault OTX, URLScan.io, Internet Archive, ThreatFox, Shodan, SecurityTrails and more. 🔍
 
 ---
 *(ASCII Art placeholder)*
@@ -177,18 +177,34 @@ If you want to contribute or build your own modules, here is the architecture:
 ```text
 twilight-orbit/
 ├── twilight_orbit/
-│   ├── cli.py              # CLI entry point (Click)
+│   ├── cli.py               # CLI entry point (Click)
 │   ├── scanner.py           # Orchestrator that runs the modules in parallel
 │   ├── config.py            # Global configuration & constants
-│   ├── modules/             # [The 12 individual recon modules]
+│   ├── modules/
+│   │   ├── dns_lookup.py    # DNS records module
+│   │   ├── whois_lookup.py  # WHOIS data module
+│   │   ├── subdomains.py    # Subdomain discovery (crt.sh & SecurityTrails)
+│   │   ├── port_scanner.py  # Top 100 ports scanner
+│   │   ├── http_headers.py  # Security headers analyzer
+│   │   ├── ssl_info.py      # SSL/TLS cert evaluator
+│   │   ├── tech_detect.py   # Tech fingerprinting
+│   │   ├── geo_lookup.py    # IP geolocation
+│   │   ├── email_harvest.py # Email discovery (Scraping & Hunter.io)
+│   │   ├── wayback.py       # Wayback Machine API
+│   │   ├── threat_intel.py  # AlienVault OTX, URLScan, ThreatFox
+│   │   └── shodan_vt.py     # Shodan, VirusTotal, AbuseIPDB
 │   └── reporting/
-│       ├── console.py       # Terminal rendering logic
+│       ├── console.py       # Terminal rendering logic (Rich)
 │       ├── json_report.py   # JSON export logic
 │       └── html_report.py   # HTML template and rendering
+├── tests/                   # (Optional) Unit tests structure
 ├── requirements.txt         # Project dependencies
 ├── .env                     # (You create this) API Keys
-├── setup.py
-└── README.md
+├── .gitignore               # Ignored files for git
+├── setup.py                 # Package setup and installation
+├── CONTRIBUTING.md          # Guide for contributors
+├── LICENSE                  # MIT License
+└── README.md                # Project documentation
 ```
 
 ## 🤝 Contributing
